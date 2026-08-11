@@ -1,0 +1,21 @@
+{
+  "name": "NON_BLOCKING_DELAY",
+  "version": "1.0.0",
+  "description": "Délai non bloquant compatible ESP8266 / ESP32 / AVR / PIC, en environnement Arduino (busy-wait + yield) et FreeRTOS (vTaskDelay)",
+  "keywords": ["delay", "non-blocking", "freeRTOS", "arduino", "esp32", "esp8266"],
+  "repository": {"type": "git", "url": "https://github.com/Fo170/NON_BLOCKING_DELAY.git"},
+  "authors": [{"name": "Olivier FOURNET", "email": "olivier.fournet@free.fr", "url": "https://github.com/Fo170", "maintainer": true}],
+  "license": "GPL-3.0-only",
+  "homepage": "https://github.com/Fo170/NON_BLOCKING_DELAY",
+  "frameworks": "arduino",
+  "platforms": ["*"],
+  "headers": "Delay.h",
+  "export": {
+    "exclude": [
+      "*.md",
+      "*.yml",
+      "*.txt",
+      "AGENTS.md"
+    ]
+  }
+}
