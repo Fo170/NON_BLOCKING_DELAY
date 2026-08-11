@@ -23,10 +23,10 @@ La détection est **automatique** : branche FreeRTOS si l'API est visible (`conf
 
 ## Points d'attention (à ne pas « simplifier »)
 
-- La condition `while (now - t0 <= duree)` est **overflow-safe** : sur une cible 32 bits, `millis()` repart de zéro après ~49,7 jours (`2^32` ms). Une condition naïve `while (now <= t0 + duree)` fait sature la borne et casse le délai.
-- Conversion ms→tick **arrondie au supérieur**, minimum **1 tick** (une durée < période dure une période).
+- **Dépassement de `millis()`** : sur une cible 32 bits, le compteur repart de zéro après ~49,7 jours (`2^32` ms). La condition `while (now - t0 <= duree)` est **sûre** : la soustraction est calculée modulo `2^32` et reste correcte même en traversant la remise à zéro. La version naïve `while (now <= t0 + duree)` **déborde** : `t0 + duree` s'enroule sur une petite valeur → `now` est presque toujours supérieur à la borne et le délai **s'arrête aussitôt (durée ≈ 0)** au lieu d'attendre la durée demandée. La garde reste valide tant que la durée demandée est très inférieure à `2^32` ms (toujours le cas en pratique).
+- **Conversion ms→tick** : arrondie **au supérieur** et **minimum 1 tick** — ex. 5 ms avec `portTICK_PERIOD_MS = 10` attend 10 ms. La conversion se fait par division (`duree / portTICK_PERIOD_MS`) + reste, **sans multiplication** : aucune saturation pour les longues durées (contrairement à `duree * configTICK_RATE_HZ / 1000`).
 
-## Variateurs (optionnels, redéfinissables avant l'include)
+## Paramètres de configuration (macros, redéfinissables avant l'include)
 
 | Macro | Défaut | Rôle |
 |---|---|---|
