@@ -32,6 +32,9 @@
 #ifndef NON_BLOCKING_DELAY_H
 #define NON_BLOCKING_DELAY_H
 
+
+// Version de la librairie (source UNIQUE — agrégée par liste_lib.h)
+#define __NON_BLOCKING_DELAY_H_VERSION__ "1.0.0"
 //----- Détection environnement -------------------------------------
 #if defined(configTICK_RATE_HZ) && defined(portTICK_PERIOD_MS)
   #define NON_BLOCKING_DELAY_USE_RTOS 1
